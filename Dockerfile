@@ -34,3 +34,5 @@ EXPOSE 80
 
 CMD touch database/database.sqlite && php artisan migrate --force && apache2-foreground
 RUN php artisan migrate --force
+RUN apt-get update && apt-get install -y nodejs npm
+RUN npm install && npm run build
