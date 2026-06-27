@@ -3,21 +3,19 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Artisan;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
-    public function register(): void
+    public function boot(): void
     {
-        //
+        // Render gibi canlı ortamlarda veritabanını otomatik kur
+        if ($this->app->environment('production')) {
+            Artisan::call('migrate --force');
+        }
     }
 
-    /**
-     * Bootstrap any application services.
-     */
-    public function boot(): void
+    public function register(): void
     {
         //
     }
