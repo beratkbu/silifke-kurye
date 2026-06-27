@@ -32,17 +32,14 @@ return [
 
     'connections' => [
 
-        'sqlite' => [
-            'driver' => 'sqlite',
-            'url' => env('DB_URL'),
-            'database' => env('DB_DATABASE', database_path('database.sqlite')),
-            'prefix' => '',
-            'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
-            'busy_timeout' => null,
-            'journal_mode' => null,
-            'synchronous' => null,
-            'transaction_mode' => 'DEFERRED',
-        ],
+'sqlite' => [
+    'driver' => 'sqlite',
+    'url' => env('DB_URL'),
+    // Dosya yolunu storage klasörüne taşıdık
+    'database' => env('DB_DATABASE', storage_path('database.sqlite')),
+    'prefix' => '',
+    'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
+],
 
         'mysql' => [
             'driver' => 'mysql',
