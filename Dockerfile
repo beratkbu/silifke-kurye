@@ -31,3 +31,5 @@ RUN a2enmod rewrite
 
 # Port ayarı
 EXPOSE 80
+
+CMD touch database/database.sqlite && php artisan migrate --force && apache2-foreground
