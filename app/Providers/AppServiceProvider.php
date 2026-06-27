@@ -4,19 +4,19 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\File;
 
 class AppServiceProvider extends ServiceProvider
 {
-public function boot(): void
-{
-    if ($this->app->environment('production')) {
-        // Eğer veritabanı dosyası yoksa önce oluştur
-        $databasePath = storage_path('database.sqlite');
-        if (!file_exists($databasePath)) {
-            touch($databasePath);
+    public function boot(): void
+    {
+        // Veritabanı dosyası yoksa oluştur
+        $path = database_path('database.sqlite');
+        if (!File::exists($path)) {
+            File::put($path, '');
         }
-        
-        // Şimdi migration'ları çalıştır
-        \Illuminate\Support\Facades\Artisan::call('migrate --force');
+
+        // Tabloları kur
+        Artisan::call('migrate --force');
     }
 }
