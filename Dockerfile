@@ -33,3 +33,4 @@ RUN a2enmod rewrite
 EXPOSE 80
 
 CMD touch database/database.sqlite && php artisan migrate --force && apache2-foreground
+RUN php artisan migrate --force
